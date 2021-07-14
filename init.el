@@ -29,10 +29,13 @@
 ;; Install packages
 (defvar myPackages
   '(
+    csv-mode
     flycheck
     flycheck-yamllint
     markdown-mode
+    sphinx-doc
     use-package
+    yaml-mode
     )
   )
 
@@ -43,10 +46,27 @@
 	    (package-install package)))
       myPackages)
 
+; ace-window
 (use-package ace-window
   :ensure t
   :init
   (global-set-key (kbd "M-o") 'ace-window)
+  )
+
+;; CSV mode
+(add-to-list 'auto-mode-alist '("\\.[Cc][Ss][Vv]\\'" . csv-mode))
+(autoload 'csv-mode "csv-mode"
+  "Major mode for editing comma-separated value files." t)
+
+;; Elpy
+(use-package elpy
+  :ensure t
+  :init
+  (elpy-enable)
+  :config
+  (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
+  :hook
+  (elpy-mode . flycheck-mode)
   )
 
 ; Interactively Do Things
@@ -63,25 +83,6 @@
   (setq enable-recursive-minibuffers t)
   )
 
-; Recent files menu
-; M-x recentf-open-files
-(require 'recentf)
-(recentf-mode 1)
-
-; Uniquely named buffers
-(setq uniquify-buffer-name-style 'forward)
-(require 'uniquify)
-
-;; Saveplace save point location when buffer is killed
-(require 'saveplace)
-(setq-default save-place t)
-(setq save-place-file (concat user-emacs-directory "places"))
-
-; Markdown
-(autoload 'markdown-mode "markdown-mode"
-   "Major mode for editing Markdown files" t)
-(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
-
 ;; Flycheck
 (add-hook 'after-init-hook #'global-flycheck-mode)
 ;(flycheck-check-syntax-automatically (quote (save mode-enabled)))
@@ -89,7 +90,6 @@
 (require 'flycheck-yamllint)
 (eval-after-load 'flycheck
  '(add-hook 'flycheck-mode-hook 'flycheck-yamllint-setup))
-
 
 ;; Javascript
 (defun my-js-mode-hook ()
@@ -100,6 +100,14 @@
 (use-package magit
   :ensure t
   )
+
+; Markdown
+(autoload 'markdown-mode "markdown-mode"
+   "Major mode for editing Markdown files" t)
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+
+; Programming
+(add-hook 'prog-mode-hook 'display-line-numbers-mode)
 
 ;; Projectile
 (use-package projectile
@@ -114,25 +122,23 @@
 (require 'python-mode)
 (add-hook 'python-mode-hook (lambda() (require 'sphinx-doc) (sphinx-doc-mode t)))
 
-;; Elpy
-(use-package elpy
-  :ensure t
-  :init
-  (elpy-enable)
-  :config
-  (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
-  :hook
-  (elpy-mode . flycheck-mode)
-  )
+; Recent files menu
+; M-x recentf-open-files
+(require 'recentf)
+(recentf-mode 1)
+
+;; Saveplace save point location when buffer is killed
+(require 'saveplace)
+(setq-default save-place t)
+(setq save-place-file (concat user-emacs-directory "places"))
 
 ;; Semantic
 (semantic-mode 1)
 (require 'semantic/sb) ;; Speedbar integration
 
-;; CSV mode
-(add-to-list 'auto-mode-alist '("\\.[Cc][Ss][Vv]\\'" . csv-mode))
-(autoload 'csv-mode "csv-mode"
-  "Major mode for editing comma-separated value files." t)
+; Uniquely named buffers
+(setq uniquify-buffer-name-style 'forward)
+(require 'uniquify)
 
 ; which-key
 (use-package which-key
