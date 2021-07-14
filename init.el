@@ -29,13 +29,7 @@
 ;; Install packages
 (defvar myPackages
   '(
-    csv-mode
-    flycheck
-    flycheck-yamllint
-    markdown-mode
-    sphinx-doc
     use-package
-    yaml-mode
     )
   )
 
@@ -54,9 +48,13 @@
   )
 
 ;; CSV mode
-(add-to-list 'auto-mode-alist '("\\.[Cc][Ss][Vv]\\'" . csv-mode))
-(autoload 'csv-mode "csv-mode"
-  "Major mode for editing comma-separated value files." t)
+(use-package csv-mode
+  :ensure t
+  :init
+  (add-to-list 'auto-mode-alist '("\\.[Cc][Ss][Vv]\\'" . csv-mode))
+  (autoload 'csv-mode "csv-mode"
+    "Major mode for editing comma-separated value files." t)
+  )
 
 ;; Elpy
 (use-package elpy
@@ -68,6 +66,21 @@
   :hook
   (elpy-mode . flycheck-mode)
   )
+
+;; Flycheck
+(use-package flycheck
+  :ensure t
+  )
+(add-hook 'after-init-hook #'global-flycheck-mode)
+;(flycheck-check-syntax-automatically (quote (save mode-enabled)))
+
+; Flycheck YAML Lint
+(use-package flycheck-yamllint
+  :ensure t
+  )
+(require 'flycheck-yamllint)
+(eval-after-load 'flycheck
+ '(add-hook 'flycheck-mode-hook 'flycheck-yamllint-setup))
 
 ; Interactively Do Things
 ;; (require 'ido)
@@ -83,14 +96,6 @@
   (setq enable-recursive-minibuffers t)
   )
 
-;; Flycheck
-(add-hook 'after-init-hook #'global-flycheck-mode)
-;(flycheck-check-syntax-automatically (quote (save mode-enabled)))
-; Flycheck YAML Lint
-(require 'flycheck-yamllint)
-(eval-after-load 'flycheck
- '(add-hook 'flycheck-mode-hook 'flycheck-yamllint-setup))
-
 ;; Javascript
 (defun my-js-mode-hook ()
   (setq indent-tabs-mode nil))
@@ -102,9 +107,13 @@
   )
 
 ; Markdown
-(autoload 'markdown-mode "markdown-mode"
-   "Major mode for editing Markdown files" t)
-(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+(use-package markdown-mode
+  :ensure t
+  :init
+  (autoload 'markdown-mode "markdown-mode"
+    "Major mode for editing Markdown files" t)
+  (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+  )
 
 ; Programming
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
@@ -120,7 +129,6 @@
 
 ;; Python
 (require 'python-mode)
-(add-hook 'python-mode-hook (lambda() (require 'sphinx-doc) (sphinx-doc-mode t)))
 
 ; Recent files menu
 ; M-x recentf-open-files
@@ -136,6 +144,12 @@
 (semantic-mode 1)
 (require 'semantic/sb) ;; Speedbar integration
 
+; sphinx-doc
+(use-package sphinx-doc
+  :ensure t
+  )
+(add-hook 'python-mode-hook (lambda() (require 'sphinx-doc) (sphinx-doc-mode t)))
+
 ; Uniquely named buffers
 (setq uniquify-buffer-name-style 'forward)
 (require 'uniquify)
@@ -145,6 +159,11 @@
   :ensure t
   :init
   (which-key-mode)
+  )
+
+; yaml-mode
+(use-package yaml-mode
+  :ensure t
   )
 
 (custom-set-variables
