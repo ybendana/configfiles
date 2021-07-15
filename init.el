@@ -63,6 +63,7 @@
   (elpy-enable)
   :config
   (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
+  (setq elpy-modules (delq 'elpy-module-highlight-indentation elpy-modules))
   :hook
   (elpy-mode . flycheck-mode)
   )
@@ -83,18 +84,29 @@
  '(add-hook 'flycheck-mode-hook 'flycheck-yamllint-setup))
 
 ; Interactively Do Things
-;; (require 'ido)
-;; (ido-mode t)
-;; (setq ido-enable-flex-matching t) ;; enable fuzzy matching
-
-; Ivy
-(use-package counsel
+(require 'ido)
+(ido-mode t)
+(ido-everywhere 1)
+(setq ido-enable-flex-matching t)
+(use-package flx-ido
   :ensure t
   :init
-  (ivy-mode)
-  (setq ivy-count-format "")
-  (setq ivy-use-virtual-buffers t)
+  (flx-ido-mode t)
+  ;; disable ido faces to see flx highlights.
+  (setq ido-use-faces nil)
   )
+
+;; ; Ivy
+;; Hangs when C-x C-f while visiting a *.py (with or without counsel-mode)
+;; https://stackoverflow.com/questions/62398175/emacs-26-3-with-ivy-counsel-hangs-on-find-file
+;; (use-package counsel
+;;   :ensure t
+;;   :init
+;;   (ivy-mode)
+;;   (counsel-mode)
+;;   (setq ivy-count-format "")
+;;   (setq ivy-use-virtual-buffers t)
+;;   )
 
 ;; Javascript
 (defun my-js-mode-hook ()
@@ -139,10 +151,6 @@
 (require 'saveplace)
 (setq-default save-place t)
 (setq save-place-file (concat user-emacs-directory "places"))
-
-;; Semantic
-(semantic-mode 1)
-(require 'semantic/sb) ;; Speedbar integration
 
 ; sphinx-doc
 (use-package sphinx-doc
