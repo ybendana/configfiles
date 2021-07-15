@@ -153,8 +153,8 @@
 ; sphinx-doc
 (use-package sphinx-doc
   :ensure t
+  :hook (python-mode . sphinx-doc-mode)
   )
-(add-hook 'python-mode-hook (lambda() (require 'sphinx-doc) (sphinx-doc-mode t)))
 
 ; Uniquely named buffers
 (setq uniquify-buffer-name-style 'forward)
