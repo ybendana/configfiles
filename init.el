@@ -71,17 +71,15 @@
 ;; Flycheck
 (use-package flycheck
   :ensure t
+  :hook (after-init . global-flycheck-mode)
   )
-(add-hook 'after-init-hook #'global-flycheck-mode)
-;(flycheck-check-syntax-automatically (quote (save mode-enabled)))
 
 ; Flycheck YAML Lint
 (use-package flycheck-yamllint
   :ensure t
+  :after flycheck
+  :hook (flycheck-mode . flycheck-yamllint-setup)
   )
-(require 'flycheck-yamllint)
-(eval-after-load 'flycheck
- '(add-hook 'flycheck-mode-hook 'flycheck-yamllint-setup))
 
 ; Interactively Do Things
 (require 'ido)
