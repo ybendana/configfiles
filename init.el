@@ -124,11 +124,6 @@
 	      ("C-c p" . projectile-command-map))
   )
 
-;; Python
-(use-package python-mode
-  :ensure t
-  )
-
 ; Recent files menu
 ; M-x recentf-open-files
 (require 'recentf)
