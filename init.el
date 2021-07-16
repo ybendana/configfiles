@@ -51,6 +51,7 @@
   :config
   (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
   (setq elpy-modules (delq 'elpy-module-highlight-indentation elpy-modules))
+  (setq elpy-rpc-python-command "python3")
   :hook
   (elpy-mode . flycheck-mode)
   )
