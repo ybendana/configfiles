@@ -17,28 +17,15 @@
 (global-set-key (kbd "\C-c o") (lambda () (interactive) (other-window -1)))
 (setq x-super-keysym 'alt) ; Set Windows/Super key to Alt
 
-; Packages
+; package and use-package
 (require 'package)
 (add-to-list 'package-archives
              '("melpa stable" . "https://stable.melpa.org/packages/") t)
+(unless package-archive-contents
+   (package-refresh-contents))
 (package-initialize)
-;; If there are no archived package contents, refresh them
-(when (not package-archive-contents)
-  (package-refresh-contents))
-
-;; Install packages
-(defvar myPackages
-  '(
-    use-package
-    )
-  )
-
-;; Scans the list in myPackages
-;; If the package listed is not already installed, install it
-(mapc #'(lambda (package)
-	  (unless (package-installed-p package)
-	    (package-install package)))
-      myPackages)
+(unless (package-installed-p 'use-package)
+  (package-install 'use-package))
 
 ; ace-window
 (use-package ace-window
@@ -177,10 +164,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-enabled-themes (quote (tango-dark)))
+ '(custom-enabled-themes '(tango-dark))
  '(package-selected-packages
-   (quote
-    (magit counsel which-key ace-window projectile use-package sphinx-doc markdown-mode yaml-mode python-mode flycheck-yamllint csv-mode))))
+   '(magit counsel which-key ace-window projectile use-package sphinx-doc markdown-mode yaml-mode python-mode flycheck-yamllint csv-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
