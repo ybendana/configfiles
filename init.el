@@ -21,7 +21,7 @@
 (require 'package)
 (add-to-list 'package-archives
              '("melpa stable" . "https://stable.melpa.org/packages/") t)
-; M-x package-refresh-contents if use-package is not found
+; M-x package-refresh-contents if packages are not found
 (package-initialize)
 (unless (package-installed-p 'use-package)
   (package-install 'use-package))
