@@ -125,7 +125,9 @@
   )
 
 ;; Python
-(require 'python-mode)
+(use-package python-mode
+  :ensure t
+  )
 
 ; Recent files menu
 ; M-x recentf-open-files
