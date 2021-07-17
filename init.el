@@ -33,6 +33,11 @@
   (global-set-key (kbd "M-o") 'ace-window)
   )
 
+; ag silver searcher
+(use-package ag
+  :ensure t
+  )
+
 ;; CSV mode
 (use-package csv-mode
   :ensure t
@@ -163,7 +168,7 @@
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes '(tango-dark))
  '(package-selected-packages
-   '(magit counsel which-key ace-window projectile use-package sphinx-doc markdown-mode yaml-mode python-mode flycheck-yamllint csv-mode)))
+   '(ag magit counsel which-key ace-window projectile use-package sphinx-doc markdown-mode yaml-mode python-mode flycheck-yamllint csv-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
