@@ -13,8 +13,8 @@
 (add-hook 'html-mode-hook 'turn-off-auto-fill)
 
 ; Key bindings
-(global-set-key (kbd "\C-c g") (lambda () (interactive) (revert-buffer)))
-(global-set-key (kbd "\C-c o") (lambda () (interactive) (other-window -1)))
+(global-set-key (kbd "\C-c g") 'revert-buffer)
+(global-set-key (kbd "\C-c m") 'set-mark-command); Needed for Windows Terminal
 (setq x-super-keysym 'alt) ; Set Windows/Super key to Alt
 
 ; package and use-package
