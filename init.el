@@ -14,7 +14,7 @@
 
 ; Key bindings
 (global-set-key (kbd "\C-c g") 'revert-buffer)
-(global-set-key (kbd "\C-c m") 'set-mark-command); Needed for Windows Terminal
+(global-set-key (kbd "\C-z") 'set-mark-command); Needed for Powershell
 (setq x-super-keysym 'alt) ; Set Windows/Super key to Alt
 
 ; package and use-package
@@ -53,6 +53,8 @@
   :init
   (elpy-enable)
   :config
+  (defalias 'pyact 'pyvenv-activate)
+  (defalias 'pydact 'pyvenv-deactivate)
   (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
   (setq elpy-modules (delq 'elpy-module-highlight-indentation elpy-modules))
   (setq elpy-rpc-python-command "python3")
