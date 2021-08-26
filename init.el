@@ -132,6 +132,25 @@
 	      ("C-c p" . projectile-command-map))
   )
 
+; Python
+; Jupyter shell is hanging on remote emacs
+;; (defun jupyter-config ()
+;;   "Configure Jupyter shell."
+;;   (interactive)
+;;   (setq python-shell-interpreter "jupyter"
+;; 	python-shell-interpreter-args "console --simple-prompt"
+;; 	python-shell-prompt-detect-failure-warning nil)
+;;   (add-to-list 'python-shell-completion-native-disabled-interpreters
+;;                "jupyter")
+;;   )
+;; (defun python-config ()
+;;   "Reset Python shell."
+;;   (interactive)
+;;   (setq python-shell-interpreter "python"
+;; 	python-shell-interpreter-args "-i"
+;; 	python-shell-prompt-detect-failure-warning t)
+;;   )
+
 ; Recent files menu
 ; M-x recentf-open-files
 (require 'recentf)
