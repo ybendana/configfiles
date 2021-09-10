@@ -133,7 +133,7 @@
   )
 
 ; Python
-; Jupyter shell is hanging on remote emacs
+1; Jupyter shell is hanging on remote emacs
 ;; (defun jupyter-config ()
 ;;   "Configure Jupyter shell."
 ;;   (interactive)
@@ -160,6 +160,11 @@
 (require 'saveplace)
 (setq-default save-place t)
 (setq save-place-file (concat user-emacs-directory "places"))
+
+; Snakemake
+(use-package snakemake-mode
+  :ensure t
+  )
 
 ; sphinx-doc
 (use-package sphinx-doc
