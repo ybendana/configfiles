@@ -3,9 +3,9 @@
 (global-eldoc-mode -1)
 (global-font-lock-mode 1) ; Enable syntax highlighting
 (set-fill-column 80)
-(scroll-bar-mode nil)
+;(scroll-bar-mode nil)
 (show-paren-mode t)
-(tool-bar-mode nil)
+;(tool-bar-mode nil)
 
 ; Set load path and hooks
 (add-to-list 'load-path "~/.emacs.d/lisp")
