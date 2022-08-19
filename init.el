@@ -67,6 +67,8 @@
 (use-package flycheck
   :ensure t
   :hook (after-init . global-flycheck-mode)
+  :init
+  (setq flycheck-python-flake8-executable "~/.local/bin/flake8")
   )
 
 ; Flycheck YAML Lint
