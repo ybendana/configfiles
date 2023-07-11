@@ -78,6 +78,11 @@
   :hook (flycheck-mode . flycheck-yamllint-setup)
   )
 
+; Groovy
+(use-package groovy-mode
+  :ensure t
+  )
+
 ; Interactively Do Things
 (require 'ido)
 (ido-mode t)
