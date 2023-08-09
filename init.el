@@ -63,6 +63,11 @@
   (elpy-mode . flycheck-mode)
   )
 
+;; ESS
+(use-package ess
+  :ensure t
+  )
+
 ;; Flycheck
 (use-package flycheck
   :ensure t
@@ -81,6 +86,8 @@
 ; Groovy
 (use-package groovy-mode
   :ensure t
+  :init
+  (add-to-list 'auto-mode-alist '("\\.nf\\'" . groovy-mode))
   )
 
 ; Interactively Do Things
