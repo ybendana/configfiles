@@ -3,9 +3,9 @@
 (global-eldoc-mode -1)
 (global-font-lock-mode 1) ; Enable syntax highlighting
 (set-fill-column 80)
-(scroll-bar-mode nil)
+;(scroll-bar-mode nil)
 (show-paren-mode t)
-(tool-bar-mode nil)
+;(tool-bar-mode nil)
 
 ; Set load path and hooks
 (add-to-list 'load-path "~/.emacs.d/lisp")
@@ -65,10 +65,17 @@
   (elpy-mode . flycheck-mode)
   )
 
+;; ESS
+(use-package ess
+  :ensure t
+  )
+
 ;; Flycheck
 (use-package flycheck
   :ensure t
   :hook (after-init . global-flycheck-mode)
+  :init
+  (setq flycheck-python-flake8-executable "~/.local/bin/flake8")
   )
 
 ; Flycheck YAML Lint
@@ -76,6 +83,13 @@
   :ensure t
   :after flycheck
   :hook (flycheck-mode . flycheck-yamllint-setup)
+  )
+
+; Groovy
+(use-package groovy-mode
+  :ensure t
+  :init
+  (add-to-list 'auto-mode-alist '("\\.nf\\'" . groovy-mode))
   )
 
 ; Interactively Do Things
