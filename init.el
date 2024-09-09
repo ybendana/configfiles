@@ -59,6 +59,8 @@
   (setq elpy-modules (delq 'elpy-module-highlight-indentation elpy-modules))
   (setq elpy-rpc-python-command "python3")
   (setq elpy-rpc-virtualenv-path 'current)
+  ;; Workaround for overlapping strings error
+  (setq elpy-eldoc-show-current-function nil)
   :hook
   (elpy-mode . flycheck-mode)
   )
@@ -132,8 +134,8 @@
 	      ("C-c p" . projectile-command-map))
   )
 
-; Python
-1; Jupyter shell is hanging on remote emacs
+;; Python
+;; Jupyter shell is hanging on remote emacs
 ;; (defun jupyter-config ()
 ;;   "Configure Jupyter shell."
 ;;   (interactive)
