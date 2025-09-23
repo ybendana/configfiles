@@ -89,7 +89,11 @@
 (use-package groovy-mode
   :ensure t
   :init
-  (add-to-list 'auto-mode-alist '("\\.nf\\'" . groovy-mode))
+  (add-to-list 'auto-mode-alist '("\\.\\(nf\\|config\\)\\'" . groovy-mode))
+  (add-hook 'groovy-mode-hook
+            (lambda ()
+              (setq indent-tabs-mode nil)
+              (setq tab-width 4)))
   )
 
 ; Interactively Do Things
