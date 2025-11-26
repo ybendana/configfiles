@@ -75,7 +75,6 @@
   :ensure t
   :hook (after-init . global-flycheck-mode)
   :init
-  (setq flycheck-python-flake8-executable "~/.local/bin/flake8")
   )
 
 ; Flycheck YAML Lint
@@ -84,6 +83,9 @@
   :after flycheck
   :hook (flycheck-mode . flycheck-yamllint-setup)
   )
+
+; Flymake
+(setq python-flymake-command '("ruff" "--quiet" "--stdin-filename=stdin" "-"))
 
 ; Groovy
 (use-package groovy-mode
