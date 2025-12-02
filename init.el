@@ -123,6 +123,11 @@
 ;;   (setq ivy-use-virtual-buffers t)
 ;;   )
 
+; isort
+(use-package py-isort
+  :ensure t
+  )
+
 ;; Javascript
 (defun my-js-mode-hook ()
   (setq indent-tabs-mode nil))
