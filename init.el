@@ -18,13 +18,8 @@
 (setq x-super-keysym 'alt) ; Set Windows/Super key to Alt
 
 ; package and use-package
-(require 'package)
 (add-to-list 'package-archives
              '("melpa stable" . "https://stable.melpa.org/packages/") t)
-; M-x package-refresh-contents if packages are not found
-(package-initialize)
-(unless (package-installed-p 'use-package)
-  (package-install 'use-package))
 
 ; ace-window
 (use-package ace-window
@@ -47,23 +42,10 @@
     "Major mode for editing comma-separated value files." t)
   )
 
-;; Elpy
-(use-package elpy
-  :ensure t
-  :init
-  (elpy-enable)
-  :config
-  (defalias 'pyact 'pyvenv-activate)
-  (defalias 'pydact 'pyvenv-deactivate)
-  (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
-  (setq elpy-modules (delq 'elpy-module-highlight-indentation elpy-modules))
-  (setq elpy-rpc-python-command "python3")
-  (setq elpy-rpc-virtualenv-path 'current)
-  ;; Workaround for overlapping strings error
-  (setq elpy-eldoc-show-current-function nil)
-  :hook
-  (elpy-mode . flycheck-mode)
-  )
+; Eglot
+(require 'eglot)
+(add-hook 'python-mode-hook 'eglot-ensure)
+(add-to-list 'eglot-stay-out-of 'flymake)
 
 ;; ESS
 (use-package ess
@@ -110,18 +92,6 @@
   ;; disable ido faces to see flx highlights.
   (setq ido-use-faces nil)
   )
-
-;; ; Ivy
-;; Hangs when C-x C-f while visiting a *.py (with or without counsel-mode)
-;; https://stackoverflow.com/questions/62398175/emacs-26-3-with-ivy-counsel-hangs-on-find-file
-;; (use-package counsel
-;;   :ensure t
-;;   :init
-;;   (ivy-mode)
-;;   (counsel-mode)
-;;   (setq ivy-count-format "")
-;;   (setq ivy-use-virtual-buffers t)
-;;   )
 
 ;; Javascript
 (defun my-js-mode-hook ()
@@ -222,7 +192,10 @@
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes '(tango-dark))
  '(package-selected-packages
-   '(ag magit counsel which-key ace-window projectile use-package sphinx-doc markdown-mode yaml-mode python-mode flycheck-yamllint csv-mode)))
+   '(ag magit which-key ace-window projectile use-package
+	sphinx-doc markdown-mode yaml-mode python-mode
+	flycheck-yamllint csv-mode))
+ '(warning-suppress-types '((native-compiler))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
