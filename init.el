@@ -13,6 +13,7 @@
 (add-hook 'html-mode-hook 'turn-off-auto-fill)
 
 ; Key bindings
+(global-set-key (kbd "\C-c f") 'recentf-open-files)
 (global-set-key (kbd "\C-c g") 'revert-buffer)
 (global-set-key (kbd "\C-z") 'set-mark-command); Needed for Powershell
 (setq x-super-keysym 'alt) ; Set Windows/Super key to Alt
