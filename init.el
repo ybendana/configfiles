@@ -2,7 +2,7 @@
 (column-number-mode t)
 (global-eldoc-mode -1)
 (global-font-lock-mode 1) ; Enable syntax highlighting
-(set-fill-column 80)
+(set-fill-column 88)
 ;(scroll-bar-mode nil)
 (show-paren-mode t)
 ;(tool-bar-mode nil)
