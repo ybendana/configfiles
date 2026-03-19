@@ -193,9 +193,9 @@
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes '(tango-dark))
  '(package-selected-packages
-   '(ag magit which-key ace-window projectile use-package
-	sphinx-doc markdown-mode yaml-mode python-mode
-	flycheck-yamllint csv-mode))
+   '(ace-window ag csv-mode flycheck flycheck-yamllint magit
+		markdown-mode projectile python-mode sphinx-doc
+		use-package which-key yaml-mode))
  '(warning-suppress-types '((native-compiler))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
